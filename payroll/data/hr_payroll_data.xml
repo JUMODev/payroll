@@ -92,35 +92,35 @@
 <!--            <field name="register_id" ref="contrib_register_mipyme"/>-->
 <!--        </record>-->
 
-        <record id="hr_payroll_rules_Holiday" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Holiday allowance</field>
-            <field name="code">ALLOW</field>
-            <field name="sequence">6</field>
-            <field name="condition_select">python</field>
-            <field name="amount_select">code</field>
-           <field name="amount_python_compute">result = GROSS and (GROSS * 0.0909) or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-        </record>
+<!--        <record id="hr_payroll_rules_Holiday" model="hr.salary.rule">-->
+<!--            <field name="category_id" ref="ALW"/>-->
+<!--            <field name="name">Holiday allowance</field>-->
+<!--            <field name="code">ALLOW</field>-->
+<!--            <field name="sequence">6</field>-->
+<!--            <field name="condition_select">python</field>-->
+<!--            <field name="amount_select">code</field>-->
+<!--           <field name="amount_python_compute">result = GROSS and (GROSS * 0.0909) or 0 </field>-->
+<!--            <field name="appears_on_payslip" eval="True"/>-->
+<!--        </record>-->
 
-        <record id="hr_payroll_rules_christmas" model="hr.salary.rule">
+        <record id="hr_payroll_rules_navidad" model="hr.salary.rule">
             <field name="category_id" ref="ALW"/>
-            <field name="name">christmas allowance</field>
-            <field name="code">CHALL</field>
+            <field name="name">PAGA NAVIDAD</field>
+            <field name="code">PN</field>
             <field name="sequence">7</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.CHALL and inputs.CHALL.amount </field>
+            <field name="condition_python">result = inputs.PN and inputs.PN.amount </field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.CHALL and inputs.CHALL.amount or 0 </field>
+            <field name="amount_python_compute">result = inputs.PN and inputs.PN.amount or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'christmas allowance', 'code': 'CHALL', }) ]"/>
+            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'PAGA NAVIDAD', 'code': 'PN', }) ]"/>
         </record>
 
 
         <record id="default_gross_salary_rule" model="hr.salary.rule">
             <field name="category_id" ref="payroll.GROSS"/>
             <field name="name">GROSS</field>
-            <field name="sequence">35</field>
+            <field name="sequence">100</field>
             <field name="code">GROSS</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -129,43 +129,53 @@
         </record>
 
  <!--discount salary rules -->
-        <record id="hr_payroll_rules_ss_social_security" model="hr.salary.rule">
+<!--        <record id="hr_payroll_rules_ss_social_security" model="hr.salary.rule">-->
+<!--            <field name="category_id" ref="DED"/>-->
+<!--            <field name="name">Social Security</field>-->
+<!--            <field name="code">SS</field>-->
+<!--            <field name="sequence">41</field>-->
+<!--            <field name="amount_select">code</field>-->
+<!--            <field name="amount_python_compute">result = GROSS and (GROSS * 0.125) or 0 </field>-->
+<!--            <field name="appears_on_payslip" eval="True"/>-->
+<!--        </record>-->
+
+        <record id="hr_payroll_rules_cotizacion_cc" model="hr.salary.rule">
             <field name="category_id" ref="DED"/>
-            <field name="name">Social Security</field>
-            <field name="code">SS</field>
-            <field name="sequence">41</field>
+            <field name="name">COTIZACION CON. COMU</field>
+            <field name="code">CC</field>
+            <field name="sequence">102</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = GROSS and (GROSS * 0.125) or 0 </field>
+            <field name="amount_python_compute">result = GROSS and (GROSS * 0.0482) or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
         </record>
 
-        <record id="hr_payroll_rules_ss_irs" model="hr.salary.rule">
+        <record id="hr_payroll_rules_scotizacion_cf" model="hr.salary.rule">
             <field name="category_id" ref="DED"/>
-            <field name="name">IRS</field>
-            <field name="code">IRS</field>
-            <field name="sequence">42</field>
+            <field name="name">COTIZACION FORMACION</field>
+            <field name="code">CF</field>
+            <field name="sequence">103</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = GROSS and (GROSS * 0.025) or 0 </field>
+            <field name="amount_python_compute">result = GROSS and (GROSS * 0.010) or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
         </record>
 
-        <record id="hr_payroll_rules_ss_advances" model="hr.salary.rule">
+        <record id="hr_payroll_rules_cotizacion_desempleo" model="hr.salary.rule">
             <field name="category_id" ref="DED"/>
-            <field name="name">Advances</field>
-            <field name="code">ADV</field>
-            <field name="sequence">43</field>
+            <field name="name">COTIZACION DESEMPLEO</field>
+            <field name="code">CD</field>
+            <field name="sequence">105</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = GROSS and (GROSS * 0.325) or 0 </field>
+            <field name="amount_python_compute">result = GROSS and (GROSS * 0.0155) or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
         </record>
 
-        <record id="hr_payroll_rules_netherlands_wage" model="hr.salary.rule">
+        <record id="hr_payroll_rules_tributacion" model="hr.salary.rule">
             <field name="category_id" ref="DED"/>
-            <field name="name">Netherlands wage tax</field>
-            <field name="code">NET_WAGE</field>
-            <field name="sequence">44</field>
+            <field name="name">TRIBUTACION I.R.P.F</field>
+            <field name="code">TRIBU</field>
+            <field name="sequence">104</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = GROSS and (GROSS * 0.125) or 0 </field>
+            <field name="amount_python_compute">result = GROSS and (GROSS * 0.0859) or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
         </record>
 
@@ -177,134 +187,34 @@
             <field name="appears_on_employee_cost_dashboard">True</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories['BASIC'] + categories['ALW'] - categories['DED']  </field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW - categories.DED  </field>
             <field name="struct_id" ref="payroll.default_structure"/>
         </record>
 
      <!--otross -->
 
-        <record id="hr_payroll_rules_normal_hours" model="hr.salary.rule">
+        <record id="hr_payroll_rules_verano" model="hr.salary.rule">
             <field name="category_id" ref="ALW"/>
-            <field name="name">Normal hours</field>
-            <field name="code">N_HOURS</field>
+            <field name="name">PAGA VERANO</field>
+            <field name="code">PV</field>
             <field name="sequence">60</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.N_HOURS and inputs.N_HOURS.amount </field>
+            <field name="condition_python">result = inputs.PV and inputs.PV.amount </field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.N_HOURS and inputs.N_HOURS.amount or 0 </field>
+            <field name="amount_python_compute">result = inputs.PV and inputs.PV.amount or 0 </field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Normal hours', 'code': 'N_HOURS', }) ]"/>
+            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'PAGA VERANO', 'code': 'PV', }) ]"/>
         </record>
 
-        <record id="hr_payroll_rules_normal_extra" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Extra Hours Level 1</field>
-            <field name="code">E1_HOURS</field>
-            <field name="sequence">61</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.E1_HOURS and inputs.E1_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.E1_HOURS and inputs.E1_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Extra Hours Level 1', 'code': 'E1_HOURS', }) ]"/>
-        </record>
 
-         <record id="hr_payroll_rules_normal_extra_level" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Extra Hours Level 2</field>
-            <field name="code">E2_HOURS</field>
-            <field name="sequence">62</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.E2_HOURS and inputs.E2_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.E2_HOURS and inputs.E2_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Extra Hours Level 2', 'code': 'E2_HOURS', }) ]"/>
-        </record>
 
-        <record id="hr_payroll_rules_saturday_hours" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Saturday Hours</field>
-            <field name="code">S_HOURS</field>
-            <field name="sequence">63</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.S_HOURS and inputs.S_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.S_HOURS and inputs.S_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Saturday Hours', 'code': 'S_HOURS', }) ]"/>
-        </record>
 
-        <record id="hr_payroll_rules_sunday_hours" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Sunday hours</field>
-            <field name="code">SU_HOURS</field>
-            <field name="sequence">64</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python"> result = inputs.SU_HOURS and inputs.SU_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.SU_HOURS and inputs.SU_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Sunday hours', 'code': 'SU_HOURS', }) ]"/>
-        </record>
-
-        <record id="hr_payroll_rules_holiday_hours" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Holiday Hours</field>
-            <field name="code">H_HOURS</field>
-            <field name="sequence">65</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.H_HOURS and inputs.H_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.H_HOURS and inputs.H_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Holiday Hours', 'code': 'H_HOURS', }) ]"/>
-        </record>
-
-        <record id="hr_payroll_rules_night_hours" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Night hours</field>
-            <field name="code">N_HOURS</field>
-            <field name="sequence">66</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.N_HOURS and inputs.N_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.N_HOURS and inputs.N_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Night hours', 'code': 'N_HOURS', }) ]"/>
-        </record>
-
-        <record id="hr_payroll_rules_hours_per_shift" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">Hours per shift</field>
-            <field name="code">HS_HOURS</field>
-            <field name="sequence">67</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.HS_HOURS and inputs.HS_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.HS_HOURS and inputs.HS_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'Hours per shift', 'code': 'HS_HOURS', }) ]"/>
-        </record>
-
-        <record id="hr_payroll_rules_after_hours" model="hr.salary.rule">
-            <field name="category_id" ref="ALW"/>
-            <field name="name">After Hours</field>
-            <field name="code">A_HOURS</field>
-            <field name="sequence">67</field>
-            <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.A_HOURS and inputs.A_HOURS.amount </field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.A_HOURS and inputs.A_HOURS.amount or 0 </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="input_ids" eval="[(5, 0, 0), (0,0, { 'name': 'After Hours', 'code': 'A_HOURS', }) ]"/>
-        </record>
 
     <!--  Salary Structure  -->
         <record id="structure_base" model="hr.payroll.structure">
             <field name="code">BASE</field>
             <field name="name">Base for new structures</field>
-            <field eval="[(6, 0, [ref('default_basic_salary_rule'), ref('hr_payroll_rules_ss_social_security'),ref('default_net_salary')])]" name="rule_ids"/>
+            <field eval="[(6, 0, [ref('default_basic_salary_rule'), ref('hr_payroll_rules_work100'), ref('default_gross_salary_rule'),ref('default_net_salary')])]" name="rule_ids"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -313,22 +223,22 @@
     <!--  Estructuras salariales -->
 
         <record id="hr_payroll_salary_specific_operations" model="hr.payroll.structure">
-            <field name="name">Specific operations</field>
+            <field name="name">Operativos Indeterminados</field>
             <field name="code">OPERATIVAS</field>
             <field name="parent_id" ref="payroll.structure_base"/>
-            <field name="rule_ids" eval="[(6, 0, [ ref('default_basic_salary_rule'), ref('hr_payroll_rules_ss_irs'), ref('hr_payroll_rules_ss_advances'), ref('hr_payroll_rules_Holiday'),ref('hr_payroll_rules_normal_hours'),ref('hr_payroll_rules_normal_extra'),
-            ref('hr_payroll_rules_normal_extra_level'),ref('hr_payroll_rules_saturday_hours'),ref('hr_payroll_rules_sunday_hours'),ref('hr_payroll_rules_holiday_hours'),ref('hr_payroll_rules_night_hours'),ref('hr_payroll_rules_hours_per_shift'),ref('hr_payroll_rules_after_hours'), ])]"/>
+            <field name="rule_ids" eval="[(6, 0, [ ref('default_basic_salary_rule'), ref('hr_payroll_rules_cotizacion_cc'), ref('hr_payroll_rules_scotizacion_cf'), ref('hr_payroll_rules_cotizacion_desempleo'),ref('hr_payroll_rules_tributacion'),ref('hr_payroll_rules_navidad'),
+            ref('hr_payroll_rules_verano'), ])]"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
 
-        <record id="hr_payroll_salary_structure_christmas_allowance" model="hr.payroll.structure">
-            <field name="name">christmas allowance</field>
-            <field name="code">christmas_allowance</field>
-            <field name="parent_id" ref="payroll.hr_payroll_salary_specific_operations"/>
-            <field name="rule_ids" eval="[(6, 0, [ ref('hr_payroll_rules_christmas'), ])]"/>
-            <field name="company_id" ref="base.main_company"/>
-        </record>
+<!--        <record id="hr_payroll_salary_structure_christmas_allowance" model="hr.payroll.structure">-->
+<!--            <field name="name">christmas allowance</field>-->
+<!--            <field name="code">christmas_allowance</field>-->
+<!--            <field name="parent_id" ref="payroll.hr_payroll_salary_specific_operations"/>-->
+<!--            <field name="rule_ids" eval="[(6, 0, [ ref('hr_payroll_rules_christmas'), ])]"/>-->
+<!--            <field name="company_id" ref="base.main_company"/>-->
+<!--        </record>-->
 
 
 
